@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1></h1>
+<h2></h2>
+
+<p></p>
+
+<p></p>
+
+<script>
+// Rock Paper Scissors game vs computer. Computer will be assigned random value in func getComputerChoice.
+function getComputerChoice() {
+    //Using 3 and +1 should indicate that the range is 1-3. 
+    let randomChoice = Math.floor(Math.random() * 3 + 1);
+
+    if(randomChoice === 1)
+    {
+        randomChoice = "Rock";
+    } 
+    else if(randomChoice === 2)
+    {   
+        randomChoice = "Paper";
+    }
+    else if(randomChoice === 3)
+    {
+        randomChoice = "Scissors";
+    }
+    return randomChoice;  
+}
+/**let compChoice = getComputerChoice();
+console.log(compChoice)
+Moving this to be done inside the round function.
+This allows for the recursive call of the round
+fuction in the event of a tie.**/
+
+//Function gets user choice of rock, paper, or scissors. 
+function getUserChoice() {
+    let choice = prompt("Time to play a round of rock, paper, scissors! Please type rock, paper, or scissors.");
+    let userChoice = choice.charAt(0).toUpperCase() + choice.slice(1).toLowerCase();
+    return userChoice;
+}
+/**let userChoice = getUserChoice();
+console.log(userChoice);
+Moving this to be done inside the round function.
+This allows for the recursive call of the round
+fuction in the event of a tie.**/
+
+//Need to write a function that plays a single round of rock, paper, scissors. 
+function round(){
+    let userChoice = getUserChoice();
+    let compChoice = getComputerChoice();
+
+        if (compChoice === "Rock" && userChoice === "Scissors" || 
+            compChoice === "Paper" && userChoice === "Rock" || 
+            compChoice === "Scissors" && userChoice === "Paper")
+                {
+                console.log(compChoice, "beats", userChoice + "! Computer wins!");
+                winner = "Computer";
+                return winner;
+                }
+        else if(userChoice === "Rock" && compChoice === "Scissors" || 
+                userChoice === "Paper" && compChoice === "Rock" || 
+                userChoice === "Scissors" && compChoice === "Paper")
+                {
+                console.log(userChoice, "beats", compChoice + "! User wins!");
+                winner = "User";
+                return winner;
+                
+                }
+        else if(compChoice === userChoice)
+            console.log("Tie! Try again!")
+            round();
+}
+
+function game(){
+    compCounter = 0;
+    userCounter = 0;
+    for (let i = 0; i < 5; i++) {
+        round();
+        if (winner === "Computer"){
+            compCounter += 1;
+        }
+        else if (winner === "User"){
+            userCounter += 1;
+        }
+    }
+
+    if(compCounter > userCounter){
+        console.log("Computer:", compCounter, "User:", userCounter);
+        console.log("The Computer is the winner!");
+    }
+    else{
+        console.log("Computer:", compCounter, "User:", userCounter);
+        console.log("The User is the winner!");
+    }
+}
+
+game();
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
