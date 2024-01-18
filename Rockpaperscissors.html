@@ -109,60 +109,6 @@ function playerChoice(buttonId){
     }
     return choice;
 }
-
-
-/* Note: disabling this portion while I test buttons (counters undefined)
-    if(compCounter > userCounter){
-        console.log("Computer:", compCounter, "User:", userCounter);
-        console.log("The Computer is the winner!");
-    }
-    else{
-        console.log("Computer:", compCounter, "User:", userCounter);
-        console.log("The User is the winner!");
-    }
-game();
-*/
-
-
-
-
-
-
-
-
-
-
-
-//Removing logic that plays 5 rounds. 
-/*
-function game(){
-    compCounter = 0;
-    userCounter = 0;
-    for (let i = 0; i < 5; i++) {
-        round();
-        if (winner === "Computer"){
-            compCounter += 1;
-        }
-        else if (winner === "User"){
-            userCounter += 1;
-        }
-    }
-}
-*/
-
-//Instructions for adding UI: 
-//1.) For now, remove the logic that plays exactly five rounds. [DONE]
-//2.) Create three buttons, one for each selection. Add an event listener to the buttons 
-//      that call your playRound function with the correct playerSelection every time a 
-//      button is clicked. (you can keep the console.logs for this step)
-//3.) Add a div for displaying results and change all of your console.logs into DOM methods.
-//4.) Display the running score, and announce a winner of the game once one player reaches 5 points.
-//5.) You will likely have to refactor (rework/rewrite) your original code to make it work for this. 
-//    That’s OK! Reworking old code is an important part of a programmer’s life.
-
-
-
-
 </script>
 
 
