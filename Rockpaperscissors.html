@@ -1,16 +1,82 @@
 <!DOCTYPE html>
 <html>
 <body>
-
-<h1></h1>
-<h2></h2>
-
-<p></p>
-
-<p></p>
+    <h1>ROCK PAPER SCISSORS</h1>
+    <button id="1">Rock</button>
+    <button id="2">Paper</button>
+    <button id="3">Scissors</button>
+    <p id="winner"></p>
+    <p id="tally"></p>
+    <p id="final"></p>
+</body>
 
 <script>
-// Rock Paper Scissors game vs computer. Computer will be assigned random value in func getComputerChoice.
+
+
+
+const button1 = document.getElementById("1");
+const button2 = document.getElementById("2");
+const button3 = document.getElementById("3");
+
+let computerScore = 0; 
+let userScore = 0; 
+let ties = 0; 
+let finalScore = 0; 
+
+button1.addEventListener('click',() => round(1));
+button2.addEventListener('click',() => round(2));
+button3.addEventListener('click',() => round(3));
+
+
+
+function round(buttonId){
+    let userChoice = playerChoice(buttonId);
+    let compChoice = getComputerChoice();
+    const winnerDiv = document.getElementById('winner');
+
+
+        if (compChoice === "Rock" && userChoice === "Scissors" || 
+            compChoice === "Paper" && userChoice === "Rock" || 
+            compChoice === "Scissors" && userChoice === "Paper")
+                {
+                winnerDiv.innerText = `${compChoice}, beats ${userChoice}! Computer Wins!`;
+                winner = "Computer";
+                computerScore += 1; 
+                tally.innerText = ` | User: ${userScore} | Computer: ${computerScore} | Ties: ${ties} | `
+                if (computerScore === 5){
+                    final.innerText = `The Computer has reached 5 points! The Computer has won and all men shall tremble! All hail the mighty computer overlord!`
+                }
+                else{
+                return winner;
+                }
+                }
+        else if(userChoice === "Rock" && compChoice === "Scissors" || 
+                userChoice === "Paper" && compChoice === "Rock" || 
+                userChoice === "Scissors" && compChoice === "Paper")
+                {
+                winnerDiv.innerText = `${userChoice}, beats ${compChoice}! User Wins!`;
+                winner = "User";
+                userScore += 1; 
+                tally.innerText = ` | User: ${userScore} | Computer: ${computerScore} | Ties: ${ties} | `
+                if (userScore === 5){
+                    final.innerText = `The User has reached 5 points! Once again meat has prevailed over machines! Praise your mighty meat!`
+                }
+                else{
+                return winner;
+                }
+                }
+        else if(compChoice === userChoice){
+                winnerDiv.innerText = `TIE! Try again!`;
+                tally.innerText = ` | User: ${userScore} | Computer: ${computerScore} | Ties: ${ties} | `
+                ties += 1; 
+                }
+}
+
+
+
+
+
+
 function getComputerChoice() {
     //Using 3 and +1 should indicate that the range is 1-3. 
     let randomChoice = Math.floor(Math.random() * 3 + 1);
@@ -29,51 +95,46 @@ function getComputerChoice() {
     }
     return randomChoice;  
 }
-/**let compChoice = getComputerChoice();
-console.log(compChoice)
-Moving this to be done inside the round function.
-This allows for the recursive call of the round
-fuction in the event of a tie.**/
+function playerChoice(buttonId){
+    let choice = "";
 
-//Function gets user choice of rock, paper, or scissors. 
-function getUserChoice() {
-    let choice = prompt("Time to play a round of rock, paper, scissors! Please type rock, paper, or scissors.");
-    let userChoice = choice.charAt(0).toUpperCase() + choice.slice(1).toLowerCase();
-    return userChoice;
-}
-/**let userChoice = getUserChoice();
-console.log(userChoice);
-Moving this to be done inside the round function.
-This allows for the recursive call of the round
-fuction in the event of a tie.**/
-
-//Need to write a function that plays a single round of rock, paper, scissors. 
-function round(){
-    let userChoice = getUserChoice();
-    let compChoice = getComputerChoice();
-
-        if (compChoice === "Rock" && userChoice === "Scissors" || 
-            compChoice === "Paper" && userChoice === "Rock" || 
-            compChoice === "Scissors" && userChoice === "Paper")
-                {
-                console.log(compChoice, "beats", userChoice + "! Computer wins!");
-                winner = "Computer";
-                return winner;
-                }
-        else if(userChoice === "Rock" && compChoice === "Scissors" || 
-                userChoice === "Paper" && compChoice === "Rock" || 
-                userChoice === "Scissors" && compChoice === "Paper")
-                {
-                console.log(userChoice, "beats", compChoice + "! User wins!");
-                winner = "User";
-                return winner;
-                
-                }
-        else if(compChoice === userChoice)
-            console.log("Tie! Try again!")
-            round();
+    if(buttonId === 1){
+        choice = "Rock";
+    } 
+    else if (buttonId === 2){
+        choice = "Paper";
+    }
+    else if (buttonId === 3){
+        choice = "Scissors"
+    }
+    return choice;
 }
 
+
+/* Note: disabling this portion while I test buttons (counters undefined)
+    if(compCounter > userCounter){
+        console.log("Computer:", compCounter, "User:", userCounter);
+        console.log("The Computer is the winner!");
+    }
+    else{
+        console.log("Computer:", compCounter, "User:", userCounter);
+        console.log("The User is the winner!");
+    }
+game();
+*/
+
+
+
+
+
+
+
+
+
+
+
+//Removing logic that plays 5 rounds. 
+/*
 function game(){
     compCounter = 0;
     userCounter = 0;
@@ -86,28 +147,24 @@ function game(){
             userCounter += 1;
         }
     }
-
-    if(compCounter > userCounter){
-        console.log("Computer:", compCounter, "User:", userCounter);
-        console.log("The Computer is the winner!");
-    }
-    else{
-        console.log("Computer:", compCounter, "User:", userCounter);
-        console.log("The User is the winner!");
-    }
 }
+*/
 
-game();
-
-
-
-//Adding a comment to commit.
+//Instructions for adding UI: 
+//1.) For now, remove the logic that plays exactly five rounds. [DONE]
+//2.) Create three buttons, one for each selection. Add an event listener to the buttons 
+//      that call your playRound function with the correct playerSelection every time a 
+//      button is clicked. (you can keep the console.logs for this step)
+//3.) Add a div for displaying results and change all of your console.logs into DOM methods.
+//4.) Display the running score, and announce a winner of the game once one player reaches 5 points.
+//5.) You will likely have to refactor (rework/rewrite) your original code to make it work for this. 
+//    That’s OK! Reworking old code is an important part of a programmer’s life.
 
 
 
 
 </script>
 
-</body>
+
 </html>
 
